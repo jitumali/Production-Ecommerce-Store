@@ -12,7 +12,7 @@ const path = require('path');
 dotenv.config();
 
 //Database config
-connectDB();
+// connectDB();
 
 // rest object
 const app = express();
@@ -36,8 +36,12 @@ app.use('*',function(req,res){
 const PORT = process.env.PORT || 4000;
 
 //run listen
-app.listen(process.env.PORT, () => {
+
+
+connectDB().then(() => {
+    app.listen(process.env.PORT, () => {
   console.log(
     `server running on ${process.env.DEV_MODE} on http://127.0.0.1:${process.env.PORT}`
   );
 });
+})
